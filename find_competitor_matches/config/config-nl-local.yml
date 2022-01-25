@@ -1,0 +1,280 @@
+---
+dwh:
+  account: uj82639.eu-west-1
+  database: picnic_nl_prod
+  warehouse: ANALYSIS
+  username: !ENV_DWH_USERNAME
+comparison_settings:
+  language: "nl"
+  accept_missing_category_names: true
+  accept_different_brand_names: true
+  max_n_inserts:
+    replacing_products: 15
+    new_matches: 10
+  thresholds:
+    new_matches:
+      max_price_difference_percentage: 0.25
+      max_content_difference_percentage: 0.2
+      similarity_thresholds:
+        flagging:
+          ah: 0.65 # Package types can not be filtered out for AH, so more certainty needed.
+          jumbo: 0.6
+          plus: 0.6
+          aldi: 0.65
+        batch_insert:
+          ah: 0.75 # Package types can not be filtered out for AH, so more certainty needed.
+          jumbo: 0.7
+          plus: 0.7
+          aldi: 0.75
+    replacing_products:
+      max_price_difference_percentage: 0.5
+      max_content_difference_percentage: 0.25
+      similarity_thresholds:
+        flagging: 0.85
+        batch_insert: 0.9
+  penalties:
+    bio_nonbio_penalty: 0.25
+    special_characters_penalty: 0.2
+    light_penalty: 0.2 # Prevent matching light (i.e. low-calorie/low-sugar) to non-light products.
+    negation_penalty: 0.1 # Prevent matching product with a negation (i.e. "not") in the name to products without a negation.
+  competitors: ["ah", "jumbo", "plus", "aldi"]
+  category_mapping:
+    Aardappelen & groente:
+      ah: ["Aardappel, groente, fruit"]
+      jumbo: ["Aardappel, rijst, pasta", "Groente", "Sla, spinazie, saladeschotels"]
+      plus: ["Aardappelen, groente, fruit"]
+      aldi: [""]
+    Baby:
+      ah: ["Drogisterij, baby", "Baby, verzorging en hygiëne"]
+      jumbo: ["Baby, peuter"]
+      plus: ["Baby, drogisterij"]
+      aldi: ["BABY-/ KINDERPRODUCTEN"]
+    Bier, wijn & drank:
+      ah:
+        [
+          "Bier, sterke drank, aperitieven",
+          "Wijn",
+          "Bier en aperitieven",
+          "Wijn en bubbels",
+        ]
+      jumbo: ["Wijn, bier, sterke drank"]
+      plus: ["Wijn, bier, sterke drank"]
+      aldi:
+        [
+          "WIJNEN",
+          "WIJNEN ROSE",
+          "BIEREN/ALCOHOLISCHE DRANKEN",
+          "WIJNEN ROOD",
+          "GEDISTILLEERD",
+          "WIJNEN WIT",
+        ]
+    Brood & banket:
+      ah: ["Bakkerij", "Bakkerij en banket"]
+      jumbo: ["Brood, cereals, beleg", "Koek, gebak, snoep, chips"]
+      plus: ["Brood, gebak"]
+      aldi: ["BROOD"]
+    Diepvries:
+      ah: ["Diepvries"]
+      jumbo: ["Diepvries"]
+      plus: ["Diepvries"]
+      aldi: ["DIEPVRIES", "BAKPRODUKTEN / DESSERTS"]
+    Dier:
+      ah: ["Huishouden, huisdier"]
+      jumbo: ["Huishouden, dieren, servicebalie"]
+      plus: ["Huisdier"]
+      aldi: ["DIERENVOEDING"]
+    Drinken:
+      ah: ["Frisdrank, sappen, koffie, thee"]
+      jumbo: ["Fris, sap, koffie, thee", "Cola regular"]
+      plus: ["Frisdrank, sappen, koffie, thee"]
+      aldi: ["FRISDRANKEN / VRUCHTENSAPPEN"]
+    Drogist:
+      ah: ["Drogisterij, baby", "Etos", "Baby, verzorging en hygiëne"]
+      jumbo: ["Drogisterij"]
+      plus: ["Baby, drogisterij"]
+      aldi: ["PERSOONLIJKE VERZORGING"]
+    Fruit:
+      ah: ["Aardappel, groente, fruit"]
+      jumbo: ["Fruit"]
+      plus: ["Aardappelen, groente, fruit"]
+      aldi: [""]
+    Groente & fruit:
+      ah: ["Aardappel, groente, fruit"]
+      jumbo:
+        ["Aardappel, rijst, pasta", "Groente", "Sla, spinazie, saladeschotels", "Fruit"]
+      plus: ["Aardappelen, groente, fruit"]
+      aldi: [""]
+    Huishouden:
+      ah:
+        [
+          "Koken, tafelen, non-food",
+          "Huishouden, huisdier",
+          "Koken, tafelen, vrije tijd",
+        ]
+      jumbo: ["Huishouden, dieren, servicebalie"]
+      plus: ["Huishouden", "Koken, non-food, servicebalie"]
+      aldi: ["WASMIDDELEN", "NON FOOD", "REINIGINGSMIDDELEN", "PAPIER EN TOILET"]
+    Kaas:
+      ah: ["Kaas, vleeswaren, tapas"]
+      jumbo: ["Brood, cereals, beleg", "Zuivel, eieren, boter"]
+      plus: ["Kaas, vleeswaren, tapas"]
+      aldi: ["KAAS"]
+    Kant & klaar:
+      ah: ["Verse kant-en-klaar maaltijden, salades"]
+      jumbo: ["Koken, soepen, maaltijden", "Sla, spinazie, saladeschotels"]
+      plus: ["Verse kant-en-klaarmaaltijden"]
+      aldi: ["KOELVERS GEMAK", "SOEPEN", "VLEESWAREN / SALADES VERPAKT"]
+    Koffie & thee:
+      ah: ["Frisdrank, sappen, koffie, thee"]
+      jumbo: ["Fris, sap, koffie, thee"]
+      plus: ["Frisdrank, sappen, koffie, thee"]
+      aldi: ["KOFFIE/THEE", "KOFFIEMELK/SUIKER"]
+    Maaltijden & gemak:
+      ah: ["Verse kant-en-klaar maaltijden, salades", "Salades, pizza, maaltijden"]
+      jumbo: ["Koken, soepen, maaltijden", "Sla, spinazie, saladeschotels"]
+      plus: ["Verse kant-en-klaarmaaltijden"]
+      aldi: ["KOELVERS GEMAK", "SOEPEN", "VLEESWAREN / SALADES VERPAKT"]
+    Ontbijt & zoet beleg:
+      ah: ["Ontbijtgranen, broodbeleg, tussendoor"]
+      jumbo: ["Brood, cereals, beleg"]
+      plus: ["Ontbijtgranen, broodbeleg, tussendoor"]
+      aldi: ["ONTBIJTKOEK,CEREALS EN OV BROODVERVANGERS"]
+    Pasta, rijst & internationaal:
+      ah: ["Pasta, rijst, internationale keuken", "Pasta, rijst en wereldkeuken"]
+      jumbo: ["Aardappel, rijst, pasta"]
+      plus: ["Pasta, rijst, internationale keuken"]
+      aldi: ["OLIE / WITVET / ZUREN / AZIJN", "SPECERIJEN / ZOUT"]
+    Snoep & snacks:
+      ah:
+        [
+          "Ontbijtgranen, broodbeleg, tussendoor",
+          "Snoep, koek, chips",
+          "Snoep, koek, chips en chocolade",
+        ]
+      jumbo: ["Koek, gebak, snoep, chips"]
+      plus:
+        ["Ontbijtgranen, broodbeleg, tussendoor", "Snoep, koek, chips, zoutjes, noten"]
+      aldi:
+        [
+          "KOEK / BISKWIE",
+          "ZOUTJES / SNACKS / ONDERLEGGERS",
+          "CHOCOLADE / BONBONS",
+          "KINDERSNOEP / DROP",
+        ]
+    Vlees, vis & vega:
+      ah: ["Vlees, kip, vis, vega"]
+      jumbo: ["Vlees, vis, vegetarisch"]
+      plus: ["Vlees, kip, vis, vega"]
+      aldi: [""]
+    Vleeswaren, spreads & tapas:
+      ah: ["Kaas, vleeswaren, delicatessen", "Kaas, vleeswaren, tapas"]
+      jumbo: ["Brood, cereals, beleg", "Vlees, vis, vegetarisch"]
+      plus: ["Kaas, vleeswaren, tapas"]
+      aldi: ["VLEESWAREN / SALADES VERPAKT"]
+    Vega & vegan:
+      ah:
+        [
+          "Vlees, kip, vis, vega",
+          "Kaas, vleeswaren, delicatessen",
+          "Kaas, vleeswaren, tapas",
+          "Zuivel, plantaardig en eieren",
+        ]
+      jumbo: ["Vlees, vis, vegetarisch"]
+      plus: ["Vlees, kip, vis, vega"]
+      aldi: ["VLEESWAREN / SALADES VERPAKT"]
+    Voorraadkast:
+      ah: ["Soepen, sauzen, kruiden, olie"]
+      jumbo: ["Koken, soepen, maaltijden"]
+      plus: ["Soepen, conserven, sauzen, smaakmakers"]
+      aldi:
+        [
+          "OLIE / WITVET / ZUREN / AZIJN",
+          "VLEES-/VISCONSERVEN",
+          "SOEPEN",
+          "GEEL VETTEN",
+          "GROENTECONSERVEN / VRUCHTENCONSERVEN",
+          "BAKPRODUKTEN / DESSERTS",
+          "KOFFIEMELK/SUIKER",
+          "HOUDBARE ZUIVEL",
+        ]
+    Zuivel:
+      ah: ["Zuivel, eieren", "Zuivel, plantaardig en eieren"]
+      jumbo: ["Zuivel, eieren, boter"]
+      plus: ["Zuivel, eieren, boter"]
+      aldi: ["ZUIVEL", "BAKPRODUKTEN / DESSERTS", "HOUDBARE ZUIVEL"]
+    Zuivel & eieren:
+      ah: ["Zuivel, eieren"]
+      jumbo: ["Zuivel, eieren, boter"]
+      plus: ["Zuivel, eieren, boter"]
+      aldi: ["ZUIVEL", "EIEREN", "BAKPRODUKTEN / DESSERTS", "HOUDBARE ZUIVEL"]
+    Unmatched:
+      ah: ["Bewuste voeding"]
+      jumbo: []
+      plus: ["Bewuste voeding"]
+      aldi: ["MAALTIJD KW"]
+  package_type_mapping:
+    Box:
+      ah: []
+      jumbo: ["DS"]
+      plus: ["doos", "box"]
+      aldi: []
+    Bag:
+      ah: []
+      jumbo: ["ZK"]
+      plus: ["zak"]
+      aldi: []
+    Bottle:
+      ah: []
+      jumbo: ["FLS"]
+      plus: ["fles"]
+      aldi: []
+    Tray:
+      ah: []
+      jumbo: ["TRA"]
+      plus: ["tray"]
+      aldi: []
+    Pack:
+      ah: []
+      jumbo: ["PAK"]
+      plus: ["pak", "set"]
+      aldi: []
+    Jar:
+      ah: []
+      jumbo: ["POT", "BUS"]
+      plus: ["pot", "bus"]
+      aldi: []
+    Can:
+      ah: []
+      jumbo: ["BLK"]
+      plus: ["blik"]
+      aldi: []
+    Cup:
+      ah: []
+      jumbo: ["CUP"]
+      plus: ["beker"]
+      aldi: []
+    Bucket:
+      ah: []
+      jumbo: ["BAK"]
+      plus: ["bak", "emmer"]
+      aldi: []
+    Blister:
+      ah: []
+      jumbo: ["BLS"]
+      plus: ["blister"]
+      aldi: []
+    Tube:
+      ah: []
+      jumbo: ["TUB"]
+      plus: ["tube"]
+      aldi: []
+    Pouch:
+      ah: []
+      jumbo: ["ZK"]
+      plus: ["zakje", "zak"]
+      aldi: []
+    Bar:
+      ah: []
+      jumbo: ["PAK"]
+      plus: ["pak"]
+      aldi: []
