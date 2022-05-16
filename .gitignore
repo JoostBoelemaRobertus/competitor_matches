@@ -1,0 +1,27 @@
+### Environment variables ###
+.env
+
+### PyCharm ###
+.idea
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+### VisualStudioCode ###
+.vscode
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+### Python ###
+__pycache__/
+
+### macOS ###
+.DS_Store
+
+### Other ###
+*~

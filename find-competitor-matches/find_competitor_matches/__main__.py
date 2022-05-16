@@ -1,17 +1,16 @@
-"""
-find_competitor_matches/__main__.py
----
+"""Entry point for find_competitor_matches.
 
-The main entry point for find_competitor_matches.
 Load some configuration, and call `FindCompetitorMatchesHandler` to run the job.
 """
 
-import warnings
-import sys
 import logging
+import sys
+import warnings
 from pathlib import Path
 
-from find_competitor_matches import FindCompetitorMatchesHandler
+from picnic.tools import config_loader
+
+from find_competitor_matches.handler import FindCompetitorMatchesHandler
 
 LOGGER = logging.getLogger(__name__)
 PROJECT_ROOT_DIR = Path(__file__).parent.resolve()
@@ -19,8 +18,7 @@ CONFIG_DIR = PROJECT_ROOT_DIR / "config"
 
 
 def configure_project() -> dict:
-    """
-    Handle common project configurations.
+    """Handle common project configurations.
 
     Return: a dictionary containing configuration parameters.
     """
@@ -28,8 +26,7 @@ def configure_project() -> dict:
     warnings.simplefilter("once", DeprecationWarning)
 
     # Logging to standard error stream
-    logging.basicConfig(stream = sys.stderr, 
-                    level = logging.DEBUG)
+    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
     # Load config
     config = config_loader.load_config(config_dir=CONFIG_DIR)
