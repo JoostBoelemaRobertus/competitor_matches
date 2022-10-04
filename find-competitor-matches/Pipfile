@@ -4,7 +4,7 @@ verify_ssl = true
 name = "picnic"
 
 [dev-packages]
-picnic-guide = "==1.8.0"
+picnic-guide = "==2.4.0"
 
 [packages]
 fuzzywuzzy = "~=0.18.0"
