@@ -4,12 +4,12 @@ verify_ssl = true
 name = "picnic"
 
 [dev-packages]
-picnic-guide = "==1.8.0"
+picnic-guide = "==2.6.3"
 
 [packages]
 fuzzywuzzy = "~=0.18.0"
 pandas = "~=1.4"
-picnic-tools = "~=0.18.3"
+picnic-tools = "~=0.23.0"
 requests = "~=2.22"
 toolz = "~=0.11.0"
 

@@ -12,6 +12,7 @@ class FindCompetitorMatchesHandler:
     """
 
     def __init__(self):
+        """Instantiate the class."""
         raise NotImplementedError(
             "Please implement FindCompetitorMatchesHandler.__init__()"
         )
