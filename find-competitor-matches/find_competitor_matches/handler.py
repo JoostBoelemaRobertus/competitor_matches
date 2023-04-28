@@ -18,4 +18,5 @@ class FindCompetitorMatchesHandler:
         )
 
     def run(self):
+        """Run find competitor matches logic."""
         raise NotImplementedError("Please implement FindCompetitorMatchesHandler.run()")

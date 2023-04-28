@@ -4,6 +4,9 @@ dwh:
   database: picnic_nl_prod
   warehouse: ANALYSIS
   username: !ENV_DWH_USERNAME
+  query_tag:
+    repository: picnic-tech-academy-python-training
+    project_name: find-competitor-matches
 comparison_settings:
   language: "nl"
   accept_missing_category_names: true

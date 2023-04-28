@@ -4,7 +4,7 @@ verify_ssl = true
 name = "picnic"
 
 [dev-packages]
-picnic-guide = "==2.6.3"
+picnic-guide = "==2.12.3"
 
 [packages]
 fuzzywuzzy = "~=0.18.0"
@@ -14,5 +14,4 @@ requests = "~=2.22"
 toolz = "~=0.11.0"
 
 [requires]
-python_version = "3.10"
-
+python_version = "3.11"

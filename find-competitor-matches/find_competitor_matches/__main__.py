@@ -37,7 +37,7 @@ def configure_project() -> dict:
 
 def main():
     """Run project."""
-    project_config = configure_project()
+    _ = configure_project()
 
     LOGGER.info("Starting 'find-competitor-matches' service.".upper())
 

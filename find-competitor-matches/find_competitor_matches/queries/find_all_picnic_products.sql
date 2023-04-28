@@ -6,7 +6,7 @@ SELECT ART_SALESFORCE_ID                                                        
        ART_P_CAT_LEV_1                                                                          AS category_level_1,
        ART_BRAND_NAME                                                                           AS brand_name,
        ART_BRAND_TIER                                                                           AS brand_tier,
-       ART_BRAND_OWNER                                                                          AS producer_name,
+       ART_PARTNER_NAME                                                                          AS producer_name,
        IFNULL(art_content_volume, IFNULL(art_content_weight, IFNULL(art_content_pieces, NULL))) AS uom_amount,
        IFNULL(art_content_volume_uom, IFNULL(art_content_weight_uom, 'pieces'))                 AS uom,
        CASE

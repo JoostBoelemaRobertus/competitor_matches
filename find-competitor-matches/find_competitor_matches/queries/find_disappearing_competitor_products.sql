@@ -53,11 +53,7 @@ WITH latest_scrape_dates AS (
                         AND competitor_price_converted_corrected >= 0.01
                         AND competitor_product_active_corrected THEN TRUE
                     ELSE FALSE
-                    END                              AS match_is_valid_correction,
-                CASE
-                    WHEN matches.key_date >= '20210127' THEN match_is_valid_correction
-                    ELSE matches.match_is_valid
-                    END                              AS match_is_valid_corrected        --start of historic tracking of competitor product properties
+                    END                              AS match_is_valid_correction
          FROM dim.ft_article_competitor_match_daily AS matches
                   INNER JOIN dim.dm_article AS pn_products
                              ON matches.key_article = pn_products.key_article

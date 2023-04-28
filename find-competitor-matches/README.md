@@ -18,5 +18,5 @@ $ pipenv run python -m find_competitor_matches
 > the root of the project. Use `.env.example` as a base for your `.env` file, adding any
 > needed environment variable.
 
-> Note 2: `NEXUS_USERNAME`, `NEXUS_PASSWORD` and `EXAMPLE_PASSWORD` must be defined in
-> the environment for the above commands to run.
+> Note 2: `NEXUS_USERNAME`, `NEXUS_PASSWORD` must be defined in the environment for the
+> above commands to run.
